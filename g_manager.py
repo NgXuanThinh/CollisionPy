@@ -14,11 +14,12 @@ class GraphicManager:
     def rmObject(self,Obj: g_object.GObject):
         self.mObjectMap.pop(Obj.mID,'rmObject: Not found key {}'.format(Obj.mID))
     
-    def run(self):
+    def run(self, fps : int):
         self.mSurface.fill((255, 255, 255))
         for e in self.mObjectMap.values():
-            e.draw()
+            e.draw(self.mSurface)
         pygame.display.flip()
+        pygame.time.Clock().tick(fps)
 
     def __init__(self) -> None:
         if GraphicManager.__instance != None:
